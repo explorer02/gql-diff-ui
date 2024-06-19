@@ -66,7 +66,7 @@ export const DisplayEnvironment: React.FC<{ environment: string }> = ({
             : "")
         }
       >
-        <div className="mt-3">
+        <div style={{ marginTop: "12px" }}>
           <div className="main-diff">
             {changes?.paths &&
               Object.keys(changes?.paths).map((node) => {
@@ -75,10 +75,11 @@ export const DisplayEnvironment: React.FC<{ environment: string }> = ({
                   changes?.paths[node] &&
                   changes?.changedValues && (
                     <div
-                      className="p-5 mx-4 mb-10"
+                      className="p-5"
                       style={{
                         border: "1px solid black",
                         borderRadius: "12px",
+                        margin: "0px 14px 12px 14px",
                       }}
                     >
                       <DisplayNode
