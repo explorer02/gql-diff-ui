@@ -26,6 +26,7 @@ function extractSchemaValue(schema: string): string {
       break;
     }
   }
+  console.log("extractedSchema: ", newSchema);
   return newSchema;
 }
 
@@ -34,18 +35,19 @@ export const DisplayDiff: React.FC<DiffViewProps> = ({ oldText, newText }) => {
   const newSchema: string = extractSchemaValue(newText);
 
   return (
-    <div className="diff-display">
-      <div style={{ paddingTop: "10px" }}>
-        <DiffView oldText={oldSchema} newText={newSchema} />
-      </div>
+    <div style={{ paddingTop: "10px" }}>
+      <DiffView oldText={oldSchema} newText={newSchema} />
     </div>
   );
 };
 
 const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
   // const diffText: string = "";
+  console.log("oldText: ", oldText);
+  console.log("newText: ", newText);
   const diffText = formatLines(diffLines(oldText, newText), { context: 3 });
-  const [diff]: FileData[] = parseDiff(diffText, { nearbySequences: "zip" });
+  console.log("diffText:", diffText);
+  const [diff] = parseDiff(diffText, { nearbySequences: "zip" });
 
   const handleCopyButton: (text: string) => Promise<void> = async (
     text: string
@@ -54,7 +56,6 @@ const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
       await navigator.clipboard.writeText(text);
     } catch (err) {
       console.error("Unable to copy to clipboard.", err);
-      alert("Copy to clipboard failed.");
     }
   };
 
@@ -76,7 +77,7 @@ const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
           </div>
           <div className="flex justify-between items-center border-t border-b border-r w-1/2 px-3 py-2">
             <div id="new-title">
-              <Typography variant="body-14"> New Code 1.1</Typography>
+              <Typography variant="body-14">New Code 1.1</Typography>
             </div>
             <IconButton
               size={"xxs"}
