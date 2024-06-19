@@ -45,7 +45,7 @@ export const DisplayDifference: React.FC = () => {
   console.log(environments);
 
   return (
-    <div className="changes-head">
+    <div className="changes-head" style={{ marginBottom: "200px" }}>
       {display && <Navigation />}
       <Box>
         {environments.map((environment) => (

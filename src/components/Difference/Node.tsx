@@ -20,11 +20,11 @@ export const DisplayNode: React.FC<DisplayNodeProps> = ({
             Object.keys(pathsTo).map((endNode) => {
               return (
                 <Box
-                  className="p-4"
                   style={{
                     border: "1px solid black",
                     borderRadius: "12px",
                     marginTop: "14px",
+                    padding: "14px",
                   }}
                 >
                   <Typography variant="body-14">
