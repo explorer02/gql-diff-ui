@@ -40,7 +40,7 @@ export const DisplayDifference: React.FC = () => {
           dispatch(navigate({ url: "/error/404" }));
         }
       });
-  }, []);
+  }, [dispatch, userId]);
 
   console.log(environments);
 
