@@ -14,7 +14,7 @@ import { AppDispatch, login, RootState } from "./store";
 import { useAppDispatch, useAppSelector } from "./Hooks/store";
 
 function App(): JSX.Element {
-  const [intialized, setInitialized] = useState<boolean>(true); // State to track if the app is initialized
+  const [intialized, setInitialized] = useState<boolean>(false); // State to track if the app is initialized
 
   const pageUrl: string = useAppSelector(
     (state: RootState) => state.route.value.url
