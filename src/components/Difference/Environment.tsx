@@ -10,7 +10,6 @@ import { AppDispatch, RootState, navigate } from "../../store";
 // Components
 import { DisplayNode } from "./Node";
 
-import { Box } from "@sprinklrjs/spaceweb/box";
 import { useAppDispatch, useAppSelector } from "../../Hooks/store";
 
 const format = require("date-format");
@@ -67,7 +66,7 @@ export const DisplayEnvironment: React.FC<{ environment: string }> = ({
             : "")
         }
       >
-        <Box className="mt-3">
+        <div className="mt-3">
           <div className="main-diff">
             {changes?.paths &&
               Object.keys(changes?.paths).map((node) => {
@@ -75,18 +74,18 @@ export const DisplayEnvironment: React.FC<{ environment: string }> = ({
                   changes?.paths &&
                   changes?.paths[node] &&
                   changes?.changedValues && (
-                    <Box className="rounded-8 p-5 border mx-4 mb-10">
+                    <div className="rounded-8 p-5 border mx-4 mb-10">
                       <DisplayNode
                         name={node}
                         pathsTo={changes?.paths[node]}
                         nodeChanges={changes?.changedValues}
                       />
-                    </Box>
+                    </div>
                   )
                 );
               })}
           </div>
-        </Box>
+        </div>
       </Collapsible>
     </div>
   );

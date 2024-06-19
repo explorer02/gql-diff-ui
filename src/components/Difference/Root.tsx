@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Collapsible } from "../Utils/Collapsible";
-import { Box } from "@sprinklrjs/spaceweb/box";
 import { DisplayEnvironment } from "./Environment";
 import axios, { AxiosResponse } from "axios";
 import { useAppSelector } from "../../Hooks/store";
@@ -48,13 +46,13 @@ export const DisplayDifference: React.FC = () => {
   return (
     <div className="changes-head">
       {display && <Navigation />}
-      <Box>
+      <div>
         {environments.map((environment) => (
-          <Box className="border rounded-8 px-4 py-3 m-3">
+          <div className="border rounded-8 px-4 py-3 m-3">
             <DisplayEnvironment environment={environment} />
-          </Box>
+          </div>
         ))}
-      </Box>
+      </div>
     </div>
   );
 };

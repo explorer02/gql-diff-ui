@@ -2,7 +2,6 @@ import { DisplayDiff } from "./Diff";
 import { DisplayPaths } from "./Path";
 
 import { Typography } from "@sprinklrjs/spaceweb/typography";
-import { Box } from "@sprinklrjs/spaceweb/box";
 
 import { Collapsible } from "../Utils/Collapsible";
 
@@ -15,11 +14,11 @@ export const DisplayNode: React.FC<DisplayNodeProps> = ({
   return (
     <div className="node-head">
       <Collapsible title={"Query: " + name}>
-        <Box>
+        <div>
           {pathsTo &&
             Object.keys(pathsTo).map((endNode) => {
               return (
-                <Box className="border rounded-8 p-4 mt-4">
+                <div className="border rounded-8 p-4 mt-4">
                   <Typography variant="body-14">
                     Affected Fragment : {endNode}
                   </Typography>
@@ -35,10 +34,10 @@ export const DisplayNode: React.FC<DisplayNodeProps> = ({
                       newText={nodeChanges[endNode].newValue}
                     />
                   </div>
-                </Box>
+                </div>
               );
             })}
-        </Box>
+        </div>
       </Collapsible>
     </div>
   );

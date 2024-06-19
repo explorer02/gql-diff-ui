@@ -6,7 +6,6 @@ import { diffLines, formatLines } from "unidiff";
 import "react-diff-view/style/index.css";
 
 import { Typography } from "@sprinklrjs/spaceweb/typography";
-import { Box } from "@sprinklrjs/spaceweb/box";
 import { IconButton } from "@sprinklrjs/spaceweb/button";
 
 import { CopyButton } from "../Utils/CopyButton";
@@ -62,11 +61,11 @@ const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
   return (
     <div>
       <main>
-        <Box className="flex" id="old-heading">
-          <Box className="flex justify-between items-center border-t border-b border-l border-r w-1/2 px-3 py-2">
-            <Box id="old-title">
+        <div className="flex" id="old-heading">
+          <div className="flex justify-between items-center border-t border-b border-l border-r w-1/2 px-3 py-2">
+            <div id="old-title">
               <Typography variant="body-14"> Old Code </Typography>
-            </Box>
+            </div>
             <IconButton
               size={"xxs"}
               onClick={() => handleCopyButton(oldText)}
@@ -74,11 +73,11 @@ const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
             >
               <CopyButton />
             </IconButton>
-          </Box>
-          <Box className="flex justify-between items-center border-t border-b border-r w-1/2 px-3 py-2">
-            <Box id="new-title">
+          </div>
+          <div className="flex justify-between items-center border-t border-b border-r w-1/2 px-3 py-2">
+            <div id="new-title">
               <Typography variant="body-14"> New Code </Typography>
-            </Box>
+            </div>
             <IconButton
               size={"xxs"}
               onClick={() => () => handleCopyButton(newText)}
@@ -86,17 +85,17 @@ const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
             >
               <CopyButton />
             </IconButton>
-          </Box>
-        </Box>
-        <Box className="pt-3 border-l border-r border-b">
-          <Box style={{ maxHeight: "300px", overflowY: "scroll" }}>
+          </div>
+        </div>
+        <div className="pt-3 border-l border-r border-b">
+          <div style={{ maxHeight: "300px", overflowY: "scroll" }}>
             <Diff viewType="split" diffType="" hunks={diff.hunks || []}>
               {(hunks) =>
                 hunks.map((hunk) => <Hunk key={hunk.content} hunk={hunk} />)
               }
             </Diff>
-          </Box>
-        </Box>
+          </div>
+        </div>
       </main>
     </div>
   );
