@@ -1,7 +1,7 @@
 {
   "name": "visualizer-frontend-ts",
   "version": "0.1.0",
-  "homepage": "https://Aadey2110.github.io/visiualizer_frontend",
+  "homepage": "https://Aadey2110.github.io/visualizer-frontend-ts",
   "private": true,
   "dependencies": {
     "@microsoft/teams-js": "^2.23.0",
