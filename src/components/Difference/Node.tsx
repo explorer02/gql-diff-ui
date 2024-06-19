@@ -13,7 +13,7 @@ export const DisplayNode: React.FC<DisplayNodeProps> = ({
   nodeChanges,
 }) => {
   return (
-    <div className="node-head" style={{ margin: "12px" }}>
+    <div className="node-head" style={{ padding: "12px" }}>
       <Collapsible title={"Query: " + name}>
         <Box>
           {pathsTo &&
