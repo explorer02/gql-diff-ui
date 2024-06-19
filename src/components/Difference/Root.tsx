@@ -48,7 +48,15 @@ export const DisplayDifference: React.FC = () => {
       {display && <Navigation />}
       <div>
         {environments.map((environment) => (
-          <div className="border rounded-8 px-4 py-3 m-3">
+          <div
+            className="border rounded-8 px-4 py-3 m-3"
+            style={{
+              border: "1px solid black",
+              borderRadius: "8px",
+              padding: "12px 14px",
+              margin: "12px",
+            }}
+          >
             <DisplayEnvironment environment={environment} />
           </div>
         ))}
