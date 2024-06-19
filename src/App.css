@@ -5,3 +5,11 @@ html {
 .App {
   background-color: white;
 }
+
+.border {
+  border: "1px solid black";
+}
+
+.rounded-8 {
+  border-radius: 12px;
+}

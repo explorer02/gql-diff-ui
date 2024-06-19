@@ -6,6 +6,7 @@ import { ShowSpaceSelect } from "./Select";
 export const Preferences: React.FC = () => {
   // State to store preference choices fetched from the server
   const [preferenceChoices, setPreferenceChoices] = useState<Choice[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   // useEffect hook to fetch preference choices when the component mounts
   useEffect(() => {
@@ -25,6 +26,7 @@ export const Preferences: React.FC = () => {
             // Log the response in case of an unsuccessful request
             console.log(JSON.stringify(response, null, 2));
           }
+          setLoading(false);
         });
     }
   }, [preferenceChoices]); // Dependency array ensures this effect runs only when preferenceChoices changes
@@ -32,7 +34,7 @@ export const Preferences: React.FC = () => {
   return (
     <div className="preference-head">
       {/* Render the ShowSpaceSelect component with the fetched preference choices */}
-      <ShowSpaceSelect choices={preferenceChoices} />
+      {loading === false && <ShowSpaceSelect choices={preferenceChoices} />}
     </div>
   );
 };
