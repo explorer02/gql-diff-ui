@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Typography } from "@sprinklrjs/spaceweb/typography";
+import { Box } from "@sprinklrjs/spaceweb/box";
 import { IconButton } from "@sprinklrjs/spaceweb/button";
 import { CopyButton } from "../Utils/CopyButton";
 
@@ -70,7 +71,7 @@ const DisplayPath: React.FC<DisplayPathProps> = ({ path }) => {
   };
 
   return (
-    <div className="border rounded-8 p-3 flex justify-between flex-row-reverse items-center gap-4 my-4">
+    <Box className="border rounded-8 p-3 flex justify-between flex-row-reverse items-center gap-4 my-4">
       <div style={{ display: "flex", justifyContent: "right" }}>
         <IconButton size={"xs"} tooltipContent={""} onClick={handleCopyButton}>
           <CopyButton />
@@ -79,6 +80,6 @@ const DisplayPath: React.FC<DisplayPathProps> = ({ path }) => {
       <Typography className="body-14">
         {path.split(" -> ").join(" → ")}
       </Typography>
-    </div>
+    </Box>
   );
 };

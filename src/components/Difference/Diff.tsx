@@ -1,11 +1,11 @@
 import React from "react";
 import { parseDiff, Diff, Hunk, FileData } from "react-diff-view";
-// @ts-ignore
-import { diffLines, formatLines } from "unidiff";
+const { diffLines, formatLines } = require("unidiff");
 
 import "react-diff-view/style/index.css";
 
 import { Typography } from "@sprinklrjs/spaceweb/typography";
+import { Box } from "@sprinklrjs/spaceweb/box";
 import { IconButton } from "@sprinklrjs/spaceweb/button";
 
 import { CopyButton } from "../Utils/CopyButton";
@@ -26,7 +26,6 @@ function extractSchemaValue(schema: string): string {
       break;
     }
   }
-  console.log("extractedSchema: ", newSchema);
   return newSchema;
 }
 
@@ -35,19 +34,19 @@ export const DisplayDiff: React.FC<DiffViewProps> = ({ oldText, newText }) => {
   const newSchema: string = extractSchemaValue(newText);
 
   return (
-    <div style={{ paddingTop: "10px" }}>
-      <DiffView oldText={oldSchema} newText={newSchema} />
+    <div className="diff-display">
+      <div style={{ paddingTop: "10px" }}>
+        <DiffView oldText={oldSchema} newText={newSchema} />
+      </div>
     </div>
   );
 };
 
 const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
   // const diffText: string = "";
-  console.log("oldText: ", oldText);
-  console.log("newText: ", newText);
   const diffText = formatLines(diffLines(oldText, newText), { context: 3 });
-  console.log("diffText:", diffText);
-  const [diff] = parseDiff(diffText, { nearbySequences: "zip" });
+  console.log("diffText: ", diffText);
+  const [diff]: FileData[] = parseDiff(diffText, { nearbySequences: "zip" });
 
   const handleCopyButton: (text: string) => Promise<void> = async (
     text: string
@@ -56,17 +55,18 @@ const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
       await navigator.clipboard.writeText(text);
     } catch (err) {
       console.error("Unable to copy to clipboard.", err);
+      alert("Copy to clipboard failed.");
     }
   };
 
   return (
     <div>
       <main>
-        <div className="flex" id="old-heading">
-          <div className="flex justify-between items-center border-t border-b border-l border-r w-1/2 px-3 py-2">
-            <div id="old-title">
+        <Box className="flex" id="old-heading">
+          <Box className="flex justify-between items-center border-t border-b border-l border-r w-1/2 px-3 py-2">
+            <Box id="old-title">
               <Typography variant="body-14"> Old Code </Typography>
-            </div>
+            </Box>
             <IconButton
               size={"xxs"}
               onClick={() => handleCopyButton(oldText)}
@@ -74,11 +74,11 @@ const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
             >
               <CopyButton />
             </IconButton>
-          </div>
-          <div className="flex justify-between items-center border-t border-b border-r w-1/2 px-3 py-2">
-            <div id="new-title">
-              <Typography variant="body-14">New Code 1.1</Typography>
-            </div>
+          </Box>
+          <Box className="flex justify-between items-center border-t border-b border-r w-1/2 px-3 py-2">
+            <Box id="new-title">
+              <Typography variant="body-14"> New Code </Typography>
+            </Box>
             <IconButton
               size={"xxs"}
               onClick={() => () => handleCopyButton(newText)}
@@ -86,17 +86,17 @@ const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
             >
               <CopyButton />
             </IconButton>
-          </div>
-        </div>
-        <div className="pt-3 border-l border-r border-b">
-          <div>
-            <Diff viewType="split" diffType="add" hunks={diff.hunks || []}>
+          </Box>
+        </Box>
+        <Box className="pt-3 border-l border-r border-b">
+          <Box style={{ maxHeight: "300px", overflowY: "scroll" }}>
+            <Diff viewType="split" diffType="" hunks={diff.hunks || []}>
               {(hunks) =>
                 hunks.map((hunk) => <Hunk key={hunk.content} hunk={hunk} />)
               }
             </Diff>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </main>
     </div>
   );
