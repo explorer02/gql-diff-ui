@@ -6,24 +6,24 @@ html {
   background-color: white;
 }
 
-.border {
+.borderly {
   border: "1px solid black";
 }
 
-.border-l {
+.borderly-l {
   border-left: "1px solid black";
 }
-.border-r {
+.borderly-r {
   border-right: "1px solid black";
 }
-.border-t {
+.borderly-t {
   border-top: "1px solid black";
 }
-.border-b {
+.borderly-b {
   border-bottom: "1px solid black";
 }
 
-.rounded-8 {
+.roundedly-8 {
   border-radius: 12px;
 }
 
