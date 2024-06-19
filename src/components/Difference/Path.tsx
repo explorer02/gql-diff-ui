@@ -77,9 +77,10 @@ const DisplayPath: React.FC<DisplayPathProps> = ({ path }) => {
         borderRadius: "12px",
         marginTop: "14px",
         marginBottom: "14px",
+        padding: "12px",
       }}
     >
-      <Box className="p-3 flex justify-between flex-row-reverse items-center gap-4">
+      <Box className="flex justify-between flex-row-reverse items-center gap-4">
         <div style={{ display: "flex", justifyContent: "right" }}>
           <IconButton
             size={"xs"}

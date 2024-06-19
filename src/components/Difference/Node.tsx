@@ -19,7 +19,7 @@ export const DisplayNode: React.FC<DisplayNodeProps> = ({
           {pathsTo &&
             Object.keys(pathsTo).map((endNode) => {
               return (
-                <Box
+                <div
                   style={{
                     border: "1px solid black",
                     borderRadius: "12px",
@@ -27,22 +27,29 @@ export const DisplayNode: React.FC<DisplayNodeProps> = ({
                     padding: "14px",
                   }}
                 >
-                  <Typography variant="body-14">
-                    Affected Fragment : {endNode}
-                  </Typography>
-                  <div>
-                    <Typography variant="body-14">Possible Paths :</Typography>
+                  <Box>
+                    <Typography variant="body-14">
+                      Affected Fragment : {endNode}
+                    </Typography>
                     <div>
-                      <DisplayPaths paths={pathsTo[endNode]} />
+                      <Typography variant="body-14">
+                        Possible Paths :
+                      </Typography>
+                      <div>
+                        <DisplayPaths paths={pathsTo[endNode]} />
+                      </div>
                     </div>
-                  </div>
-                  <div className="diff-display" style={{ paddingTop: "20px" }}>
-                    <DisplayDiff
-                      oldText={nodeChanges[endNode].oldValue}
-                      newText={nodeChanges[endNode].newValue}
-                    />
-                  </div>
-                </Box>
+                    <div
+                      className="diff-display"
+                      style={{ paddingTop: "20px" }}
+                    >
+                      <DisplayDiff
+                        oldText={nodeChanges[endNode].oldValue}
+                        newText={nodeChanges[endNode].newValue}
+                      />
+                    </div>
+                  </Box>
+                </div>
               );
             })}
         </Box>

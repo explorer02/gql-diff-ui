@@ -45,23 +45,25 @@ export const DisplayDifference: React.FC = () => {
   console.log(environments);
 
   return (
-    <div className="changes-head" style={{ marginBottom: "200px" }}>
-      {display && <Navigation />}
-      <Box>
-        {environments.map((environment) => (
-          <div
-            style={{
-              border: "1px solid black",
-              borderRadius: "12px",
-              margin: "12px",
-            }}
-          >
-            <Box className="px-4 py-3">
-              <DisplayEnvironment environment={environment} />
-            </Box>
-          </div>
-        ))}
-      </Box>
+    <div>
+      <div className="changes-head" style={{ marginBottom: "200px" }}>
+        {display && <Navigation />}
+        <Box>
+          {environments.map((environment) => (
+            <div
+              style={{
+                border: "1px solid black",
+                borderRadius: "12px",
+                margin: "12px",
+              }}
+            >
+              <Box className="px-4 py-3">
+                <DisplayEnvironment environment={environment} />
+              </Box>
+            </div>
+          ))}
+        </Box>
+      </div>
     </div>
   );
 };
