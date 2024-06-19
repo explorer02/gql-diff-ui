@@ -1,4 +1,3 @@
-const { diffLines, formatLines } = require("unidiff");
 import React from "react";
 import { parseDiff, Diff, Hunk, FileData } from "react-diff-view";
 
@@ -9,6 +8,8 @@ import { Box } from "@sprinklrjs/spaceweb/box";
 import { IconButton } from "@sprinklrjs/spaceweb/button";
 
 import { CopyButton } from "../Utils/CopyButton";
+
+const { diffLines, formatLines } = require("unidiff");
 
 function extractSchemaValue(schema: string): string {
   if (schema === null || schema.indexOf(`"""true"""`) === -1) {
