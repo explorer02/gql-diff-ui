@@ -19,7 +19,10 @@ export const DisplayNode: React.FC<DisplayNodeProps> = ({
           {pathsTo &&
             Object.keys(pathsTo).map((endNode) => {
               return (
-                <Box className="border rounded-8 p-4 mt-4">
+                <Box
+                  className="p-4 mt-4"
+                  style={{ border: "1px solid black", borderRadius: "12px" }}
+                >
                   <Typography variant="body-14">
                     Affected Fragment : {endNode}
                   </Typography>

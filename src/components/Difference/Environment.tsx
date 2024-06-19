@@ -74,7 +74,13 @@ export const DisplayEnvironment: React.FC<{ environment: string }> = ({
                   changes?.paths &&
                   changes?.paths[node] &&
                   changes?.changedValues && (
-                    <div className="rounded-8 p-5 border mx-4 mb-10">
+                    <div
+                      className="p-5 mx-4 mb-10"
+                      style={{
+                        border: "1px solid black",
+                        borderRadius: "12px",
+                      }}
+                    >
                       <DisplayNode
                         name={node}
                         pathsTo={changes?.paths[node]}

@@ -64,7 +64,10 @@ const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
     <div>
       <main>
         <Box className="flex" id="old-heading">
-          <Box className="flex justify-between items-center border-t border-b border-l border-r w-1/2 px-3 py-2">
+          <Box
+            className="flex justify-between items-center w-1/2 px-3 py-2"
+            style={{ border: "1px solid black" }}
+          >
             <Box id="old-title">
               <Typography variant="body-14"> Old Code </Typography>
             </Box>
@@ -76,7 +79,14 @@ const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
               <CopyButton />
             </IconButton>
           </Box>
-          <Box className="flex justify-between items-center border-t border-b border-r w-1/2 px-3 py-2">
+          <Box
+            className="flex justify-between items-center w-1/2 px-3 py-2"
+            style={{
+              borderTop: "1px solid black",
+              borderBottom: "1px solid black",
+              borderRight: "1px solid black",
+            }}
+          >
             <Box id="new-title">
               <Typography variant="body-14"> New Code </Typography>
             </Box>
@@ -89,7 +99,14 @@ const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
             </IconButton>
           </Box>
         </Box>
-        <Box className="pt-3 border-l border-r border-b">
+        <Box
+          className="pt-3"
+          style={{
+            borderLeft: "1px solid black",
+            borderBottom: "1px solid black",
+            borderRight: "1px solid black",
+          }}
+        >
           <Box style={{ maxHeight: "300px", overflowY: "scroll" }}>
             <Diff viewType="split" diffType="" hunks={diff.hunks || []}>
               {(hunks) =>
