@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Collapsible } from "../Utils/Collapsible";
 import { Box } from "@sprinklrjs/spaceweb/box";
 import { DisplayEnvironment } from "./Environment";
 import axios, { AxiosResponse } from "axios";

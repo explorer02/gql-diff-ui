@@ -11,7 +11,6 @@ import axios, { AxiosResponse } from "axios";
 import { AppDispatch, RootState, navigate } from "../../store";
 import { useAppDispatch, useAppSelector } from "../../Hooks/store";
 import { Typography } from "@sprinklrjs/spaceweb/typography";
-import { group } from "console";
 
 // Function to transform choices into options for the MultiSelect component
 function getOptions(choices: Choice[]): Optgroups {
