@@ -1,6 +1,6 @@
+const { diffLines, formatLines } = require("unidiff");
 import React from "react";
 import { parseDiff, Diff, Hunk, FileData } from "react-diff-view";
-const { diffLines, formatLines } = require("unidiff");
 
 import "react-diff-view/style/index.css";
 
