@@ -76,7 +76,7 @@ const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
           </div>
           <div className="flex justify-between items-center border-t border-b border-r w-1/2 px-3 py-2">
             <div id="new-title">
-              <Typography variant="body-14"> New Code </Typography>
+              <Typography variant="body-14"> New Code 1.1</Typography>
             </div>
             <IconButton
               size={"xxs"}
