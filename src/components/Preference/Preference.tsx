@@ -13,7 +13,9 @@ export const Preferences: React.FC = () => {
     if (preferenceChoices.length === 0) {
       // Make a GET request to fetch preference choices from the server
       axios
-        .get("http://localhost:3978/api/preferences/choices")
+        .get(
+          "https://teams-bot-app-service.onrender.com/api/preferences/choices"
+        )
         .then((response: AxiosResponse) => {
           // If the response is successful, update the state with fetched choices
           if (response.data?.success) {

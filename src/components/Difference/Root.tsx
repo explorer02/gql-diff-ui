@@ -22,7 +22,9 @@ export const DisplayDifference: React.FC = () => {
   useEffect(() => {
     console.log("Entered UseEffect");
     axios
-      .post("http://localhost:3978/api/environments", { userId })
+      .post("https://teams-bot-app-service.onrender.com/api/environments", {
+        userId,
+      })
       .then((response: AxiosResponse) => {
         console.log("response", response.data);
         if (response?.data?.success === true) {

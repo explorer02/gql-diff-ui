@@ -28,7 +28,7 @@ export const DisplayEnvironment: React.FC<{ environment: string }> = ({
   useEffect(() => {
     // Fetch changes data from the API when the component mounts
     axios
-      .post("http://localhost:3978/api/changes", {
+      .post("https://teams-bot-app-service.onrender.com/api/changes", {
         userId,
         environment,
       })

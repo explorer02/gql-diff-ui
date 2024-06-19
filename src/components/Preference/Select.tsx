@@ -73,11 +73,14 @@ export const ShowSpaceSelect: React.FC<ShowSpaceSelectProps> = ({
     if (value.length) {
       // Make a POST request to save preferences
       axios
-        .post("http://localhost:3978/api/preferences/save", {
-          environment: "lite.qa6",
-          choices: value,
-          userId: userId,
-        })
+        .post(
+          "https://teams-bot-app-service.onrender.com/api/preferences/save",
+          {
+            environment: "lite.qa6",
+            choices: value,
+            userId: userId,
+          }
+        )
         .then((response: AxiosResponse) => {
           // Handle successful response
           if (response.data?.success) {
