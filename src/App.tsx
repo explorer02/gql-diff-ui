@@ -23,13 +23,20 @@ function App(): JSX.Element {
 
   // Initialize Microsoft Teams app and get the user-id from context
   console.log("Entered App.tsx");
-  msTeams.app.initialize().then(() => {
-    console.log("App Initialized");
-    msTeams.app.getContext().then((context: msTeams.app.Context) => {
-      console.log("Context Retrieved");
-      dispatch(login({ userId: context?.user?.id })); // Dispatch the login action with user ID (Save the user id as global state)
-      setInitialized(true); // Set the initialized state to true
-    });
+  // msTeams.app.initialize().then(() => {
+  //   console.log("App Initialized");
+  //   msTeams.app.getContext().then((context: msTeams.app.Context) => {
+  //     console.log("Context Retrieved");
+  //     dispatch(login({ userId: context?.user?.id })); // Dispatch the login action with user ID (Save the user id as global state)
+  //     setInitialized(true); // Set the initialized state to true
+  //   });
+  // });
+
+  msTeams.appInitializeHelper("2.0");
+  msTeams.app.getContext().then((context: msTeams.app.Context) => {
+    console.log("Context Retrieved");
+    dispatch(login({ userId: context?.user?.id })); // Dispatch the login action with user ID (Save the user id as global state)
+    setInitialized(true); // Set the initialized state to true
   });
 
   return (
