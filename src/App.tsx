@@ -32,8 +32,7 @@ function App(): JSX.Element {
   //   });
   // });
 
-  setTimeout(() => msTeams.app.initialize(), 10000);
-
+  msTeams.app.initialize();
   msTeams.app.getContext().then((context: msTeams.app.Context) => {
     console.log("Context Retrieved");
     dispatch(login({ userId: context?.user?.id })); // Dispatch the login action with user ID (Save the user id as global state)
