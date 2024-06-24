@@ -9,10 +9,16 @@ export default function App() {
   const [{ inTeams, theme, context }] = useTeams();
   const [userId, setUserId] = useState<string | undefined>();
 
+  app.initialize().then(() => {
+    console.log("Initialized");
+  });
+
   useEffect(() => {
     if (inTeams === true) {
       app.notifySuccess();
     } else {
+      console.log(inTeams);
+      console.log(context);
       setUserId("Not in Microsoft Teams");
     }
   }, [inTeams]);
