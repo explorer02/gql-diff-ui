@@ -1,19 +1,30 @@
-import React, { useEffect } from "react";
-import "./App.css";
-import * as msTeams from "@microsoft/teams-js";
+import { useState, useEffect } from "react";
+import { useTeams } from "msteams-react-base-component";
+import { app } from "@microsoft/teams-js";
 
-function App() {
-  console.log("App Entered");
+/**
+ * Implementation of the debug content page
+ */
+export const DebugTab = () => {
+  const [{ inTeams, theme, context }] = useTeams();
+  const [userId, setUserId] = useState<string | undefined>();
+
   useEffect(() => {
-    msTeams.app.initialize().then(() => {
-      console.log("App Initialized");
-    });
-  });
-  return (
-    <div className="App">
-      <h1>Hello React</h1>
-    </div>
-  );
-}
+    if (inTeams === true) {
+      app.notifySuccess();
+    } else {
+      setUserId("Not in Microsoft Teams");
+    }
+  }, [inTeams]);
 
-export default App;
+  useEffect(() => {
+    if (context) {
+      setUserId(context?.user?.id);
+    }
+  }, [context]);
+
+  /**
+   * The render() method to create the UI of the tab
+   */
+  return <h1>user id - {userId}</h1>;
+};
