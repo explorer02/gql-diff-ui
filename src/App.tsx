@@ -5,7 +5,7 @@ import { app } from "@microsoft/teams-js";
 /**
  * Implementation of the debug content page
  */
-export const DebugTab = () => {
+export default function App() {
   const [{ inTeams, theme, context }] = useTeams();
   const [userId, setUserId] = useState<string | undefined>();
 
@@ -27,4 +27,4 @@ export const DebugTab = () => {
    * The render() method to create the UI of the tab
    */
   return <h1>user id - {userId}</h1>;
-};
+}
