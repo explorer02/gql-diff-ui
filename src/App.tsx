@@ -1,36 +1,58 @@
-import { useState, useEffect } from "react";
-import { useTeams } from "msteams-react-base-component";
-import { app } from "@microsoft/teams-js";
+// Essentials
+import "./App.css";
+import { useState } from "react";
+import * as msTeams from "@microsoft/teams-js";
 
-/**
- * Implementation of the debug content page
- */
-export default function App() {
-  const [{ inTeams, theme, context }] = useTeams();
-  const [userId, setUserId] = useState<string | undefined>();
+// Components
+import { DisplayDifference } from "./components/Difference/Root";
+import { Preferences } from "./components/Preference/Preference";
+import { LoginError } from "./components/Error/Login";
+import { Error404 } from "./components/Error/Error";
 
-  app.initialize().then(() => {
-    console.log("Initialized");
+// Redux Tools
+import { AppDispatch, login, RootState } from "./store";
+import { useAppDispatch, useAppSelector } from "./Hooks/store";
+
+function App(): JSX.Element {
+  const [intialized, setInitialized] = useState<boolean>(false); // State to track if the app is initialized
+
+  const pageUrl: string = useAppSelector(
+    (state: RootState) => state.route.value.url
+  ); // Get the current page URL from Redux store
+  const dispatch: AppDispatch = useAppDispatch(); // Get the dispatch function from Redux
+
+  // Initialize Microsoft Teams app and get the user-id from context
+  console.log("Entered App.tsx");
+  // msTeams.app.initialize().then(() => {
+  //   console.log("App Initialized");
+  //   msTeams.app.getContext().then((context: msTeams.app.Context) => {
+  //     console.log("Context Retrieved");
+  //     dispatch(login({ userId: context?.user?.id })); // Dispatch the login action with user ID (Save the user id as global state)
+  //     setInitialized(true); // Set the initialized state to true
+  //   });
+  // });
+
+  msTeams.app.initialize().catch((err) => {
+    console.log("Initialization Error");
+    setInitialized(true);
+  });
+  msTeams.app.getContext().then((context: msTeams.app.Context) => {
+    console.log("Context Retrieved");
+    dispatch(login({ userId: context?.user?.id })); // Dispatch the login action with user ID (Save the user id as global state)
+    setInitialized(true); // Set the initialized state to true
   });
 
-  useEffect(() => {
-    if (inTeams === true) {
-      app.notifySuccess();
-    } else {
-      console.log(inTeams);
-      console.log(context);
-      setUserId("Not in Microsoft Teams");
-    }
-  }, [inTeams]);
-
-  useEffect(() => {
-    if (context) {
-      setUserId(context?.user?.id);
-    }
-  }, [context]);
-
-  /**
-   * The render() method to create the UI of the tab
-   */
-  return <h1>user id - {userId}</h1>;
+  return (
+    <div className="App">
+      <div className="route-display">
+        {/* Conditionally render components based on initialization status and current page URL */}
+        {intialized && pageUrl === "/" && <DisplayDifference />}
+        {intialized && pageUrl === "/preferences" && <Preferences />}
+        {intialized && pageUrl === "/error/login" && <LoginError />}
+        {intialized && pageUrl === "/error/404" && <Error404 />}
+      </div>
+    </div>
+  );
 }
+
+export default App;
