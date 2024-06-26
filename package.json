@@ -1,7 +1,7 @@
 {
-  "name": "visualizer-frontend-ts",
+  "name": "gql-diff-ui",
   "version": "0.1.0",
-  "homepage": "https://Aadey2110.github.io/visualizer-frontend-ts",
+  "homepage": "https://explorer02.github.io/gql-diff-ui",
   "private": true,
   "dependencies": {
     "@babel/preset-react": "^7.24.7",
