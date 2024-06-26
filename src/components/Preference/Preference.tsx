@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { ShowSpaceSelect } from "./Select";
 import { Box } from "@sprinklrjs/spaceweb/box";
+import { useAppSelector } from "../../Hooks/store";
+import { AppDispatch, RootState } from "../../store";
+import { Root } from "react-dom/client";
 
 // Preferences component to manage and display user preferences
 export const Preferences: React.FC = () => {
@@ -9,11 +12,16 @@ export const Preferences: React.FC = () => {
   const [preferenceChoices, setPreferenceChoices] = useState<Choice[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
+  const userId: string = useAppSelector(
+    (state: RootState) => state.user.value.userId
+  );
+
   useEffect(() => {
     if (preferenceChoices.length === 0) {
       axios
-        .get(
-          "https://teams-bot-app-service.onrender.com/api/preferences/choices"
+        .post(
+          "https://teams-bot-app-service.onrender.com/api/preferences/choices",
+          { userId: userId }
         )
         .then((response: AxiosResponse) => {
           // If the response is successful, update the state with fetched choices

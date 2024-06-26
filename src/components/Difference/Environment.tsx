@@ -1,5 +1,5 @@
 // Essentials
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 
 import { Collapsible } from "../Utils/Collapsible";
@@ -25,24 +25,26 @@ export const DisplayEnvironment: React.FC<{ environment: string }> = ({
   ); // Get the userId from Redux store
 
   const [changes, setChanges] = useState<Changes>({}); // State to store the changes;
-  axios
-    .post("https://teams-bot-app-service.onrender.com/api/changes", {
-      userId,
-      environment,
-    })
-    .then((response: AxiosResponse) => {
-      if (response.data.success === true) {
-        // If the response is successful, update the state
-        console.log(response.data.changes);
-        setChanges({
-          ...response.data.changes,
-          timeStamp: response.data.timeStamp,
-        });
-      } else {
-        // For any other errors, navigate to the 404 error page
-        navigate("/error/404");
-      }
-    }); // Dependency array to re-run effect if changes state updates
+  useEffect(() => {
+    axios
+      .post("https://teams-bot-app-service.onrender.com/api/changes", {
+        userId,
+        environment,
+      })
+      .then((response: AxiosResponse) => {
+        if (response.data.success === true) {
+          // If the response is successful, update the state
+          console.log(response.data.changes);
+          setChanges({
+            ...response.data.changes,
+            timeStamp: response.data.timeStamp,
+          });
+        } else {
+          // For any other errors, navigate to the 404 error page
+          navigate("/error/404");
+        }
+      });
+  });
 
   return (
     <div className="Home">
