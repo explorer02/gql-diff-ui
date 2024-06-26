@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { ShowSpaceSelect } from "./Select";
+import { Box } from "@sprinklrjs/spaceweb/box";
 
 // Preferences component to manage and display user preferences
 export const Preferences: React.FC = () => {
-  // State to store preference choices fetched from the server
+  // // State to store preference choices fetched from the server
   const [preferenceChoices, setPreferenceChoices] = useState<Choice[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // useEffect hook to fetch preference choices when the component mounts
   useEffect(() => {
-    // Check if preferenceChoices is empty before making the API call
     if (preferenceChoices.length === 0) {
-      // Make a GET request to fetch preference choices from the server
       axios
         .get(
           "https://teams-bot-app-service.onrender.com/api/preferences/choices"
@@ -29,12 +27,14 @@ export const Preferences: React.FC = () => {
           setLoading(false);
         });
     }
-  }, [preferenceChoices]); // Dependency array ensures this effect runs only when preferenceChoices changes
+  }, [preferenceChoices]);
 
   return (
-    <div className="preference-head">
-      {/* Render the ShowSpaceSelect component with the fetched preference choices */}
-      {loading === false && <ShowSpaceSelect choices={preferenceChoices} />}
-    </div>
+    <Box className="spr-ui-05 min-h-screen">
+      <div className="preference-head spr-ui-05" style={{ paddingTop: "4rem" }}>
+        {/* Render the ShowSpaceSelect component with the fetched preference choices */}
+        {loading === false && <ShowSpaceSelect choices={preferenceChoices} />}
+      </div>
+    </Box>
   );
 };

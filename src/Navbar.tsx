@@ -1,12 +1,10 @@
-import { navigate, AppDispatch } from "./store";
-
 import { Typography } from "@sprinklrjs/spaceweb/typography";
 import { Button } from "@sprinklrjs/spaceweb/button";
 
-import { useAppDispatch } from "./Hooks/store";
+import { useNavigate } from "react-router-dom";
 
 export const Navigation: React.FC = () => {
-  const dispatch: AppDispatch = useAppDispatch();
+  const navigate = useNavigate();
   return (
     <div
       className="navigation-bar"
@@ -19,13 +17,14 @@ export const Navigation: React.FC = () => {
     >
       <Typography variant="h2">Detect GQL Change</Typography>
       <div className="navs">
-        <div style={{ cursor: "pointer" }}>
-          <Button
-            variant="tertiary"
-            onClick={() => dispatch(navigate({ url: "/preferences" }))}
-          >
-            Set Preferences
-          </Button>
+        <div
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            console.log("Done......................");
+            navigate("/preferences");
+          }}
+        >
+          <Button variant="tertiary">Set Preferences</Button>
         </div>
       </div>
     </div>
