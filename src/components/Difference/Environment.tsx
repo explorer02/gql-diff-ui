@@ -1,28 +1,30 @@
 // Essentials
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
 
 import { Collapsible } from "../Utils/Collapsible";
 
 // Redux Tools
-import { AppDispatch, RootState, navigate } from "../../store";
+import { RootState } from "../../store";
 
 // Components
 import { DisplayNode } from "./Node";
+import { useAppSelector } from "../../Hooks/store";
 
-import { useAppDispatch, useAppSelector } from "../../Hooks/store";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
-const format = require("date-format");
+//@ts-expect-error --no-type-module-found
+import format from "date-format";
 
 export const DisplayEnvironment: React.FC<{ environment: string }> = ({
   environment,
 }) => {
-  const dispatch: AppDispatch = useAppDispatch(); // Get the dispatch function from Redux
+  const navigate: NavigateFunction = useNavigate();
   const userId: string = useAppSelector(
     (state: RootState) => state.user.value.userId
   ); // Get the userId from Redux store
 
-  const [changes, setChanges] = useState<Changes>({}); // State to store the changes da;
+  const [changes, setChanges] = useState<Changes>({}); // State to store the changes;
 
   useEffect(() => {
     // Fetch changes data from the API when the component mounts
@@ -32,12 +34,6 @@ export const DisplayEnvironment: React.FC<{ environment: string }> = ({
         environment,
       })
       .then((response: AxiosResponse) => {
-        // NOTE: Dev-Changes
-        // setDisplay(true);
-        // if (!Object.keys(changes).length)
-        //   setChanges({ ...response.data?.changes });
-        // return;
-        // ------NOTE: Dev-Changes
         if (response.data.success === true) {
           // If the response is successful, update the state
           console.log(response.data.changes);
@@ -47,33 +43,37 @@ export const DisplayEnvironment: React.FC<{ environment: string }> = ({
           });
         } else {
           // For any other errors, navigate to the 404 error page
-          dispatch(navigate({ url: "/error/404" }));
+          navigate("/error/404");
         }
       });
-  }, [userId, dispatch]); // Dependency array to re-run effect if changes state updates
+  }, []); // Dependency array to re-run effect if changes state updates
 
   return (
     <div className="Home">
       <Collapsible
-        title={
-          "Environment: " +
-          environment +
-          (changes.timeStamp
+        title={`Environment: ${environment} ${
+          changes.timeStamp
             ? `  (${format(
                 "dd-MM-yyyy hh:mm:ss",
                 new Date(changes.timeStamp)
               )})`
-            : "")
-        }
+            : ""
+        }`}
       >
-        <div style={{ marginTop: "12px" }}>
+        <div
+          style={
+            changes?.paths?.length && Object.keys(changes.paths).length > 0
+              ? { marginTop: "12px" }
+              : {}
+          }
+        >
           <div className="main-diff">
             {changes?.paths &&
-              Object.keys(changes?.paths).map((node) => {
+              Object.keys(changes.paths).map((node) => {
                 return (
-                  changes?.paths &&
-                  changes?.paths[node] &&
-                  changes?.changedValues && (
+                  changes.paths &&
+                  changes.paths[node] &&
+                  changes.changedValues && (
                     <div
                       className="p-5"
                       style={{

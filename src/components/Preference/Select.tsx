@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   MultiSelect,
   Optgroups,
@@ -8,9 +8,11 @@ import {
 import { Box } from "@sprinklrjs/spaceweb/box";
 import { Button } from "@sprinklrjs/spaceweb/button";
 import axios, { AxiosResponse } from "axios";
-import { AppDispatch, RootState, navigate } from "../../store";
-import { useAppDispatch, useAppSelector } from "../../Hooks/store";
+import { RootState } from "../../store";
+import { useAppSelector } from "../../Hooks/store";
 import { Typography } from "@sprinklrjs/spaceweb/typography";
+
+import { useNavigate } from "react-router-dom";
 
 // Function to transform choices into options for the MultiSelect component
 function getOptions(choices: Choice[]): Optgroups {
@@ -41,11 +43,11 @@ function getOptions(choices: Choice[]): Optgroups {
   });
 
   const options: Optgroups = {};
-  for (let environment of Object.keys(QueriesGroup)) {
+  for (const environment of Object.keys(QueriesGroup)) {
     const groupName: string = `Queries - ${environment}`;
     options[groupName] = QueriesGroup[environment];
   }
-  for (let environment of Object.keys(MutationsGroup)) {
+  for (const environment of Object.keys(MutationsGroup)) {
     const groupName: string = `Mutations - ${environment}`;
     options[groupName] = MutationsGroup[environment];
   }
@@ -60,11 +62,11 @@ export const ShowSpaceSelect: React.FC<ShowSpaceSelectProps> = ({
   const [value, setValue] = useState<Value>([]);
   const [emptyError, setEmptyError] = useState<boolean>(false);
 
-  // Use Redux hooks to dispatch actions and access the user ID from the store
-  const dispatch: AppDispatch = useAppDispatch();
   const userId: string = useAppSelector(
     (state: RootState) => state.user.value.userId
   );
+
+  const navigate = useNavigate();
 
   // Handler function for the save button click event
   const handleSaveButton: () => void = () => {
@@ -83,7 +85,7 @@ export const ShowSpaceSelect: React.FC<ShowSpaceSelectProps> = ({
         .then((response: AxiosResponse) => {
           // Handle successful response
           if (response.data?.success) {
-            dispatch(navigate({ url: "/" })); // Navigate to home page on success
+            navigate("/changes"); // Navigate to home page on success
           } else {
             // Log the response in case of an error
             console.log(JSON.stringify(response, null, 2));
@@ -97,21 +99,22 @@ export const ShowSpaceSelect: React.FC<ShowSpaceSelectProps> = ({
   };
 
   return (
-    <div>
+    <div
+      className="spr-border-03"
+      style={{
+        border: "1px solid black",
+        borderRadius: "12px",
+        width: "40rem",
+        padding: "4rem",
+        margin: "auto",
+        minHeight: "60rem",
+        backgroundColor: "white",
+      }}
+    >
       {/* Header with instructions */}
-      <h2
-        style={{
-          fontSize: "35px",
-          fontWeight: "300",
-          textAlign: "center",
-          marginTop: "50px",
-          marginBottom: "30px",
-        }}
-      >
-        Choose Queries and Mutations to get notifications for -
-      </h2>
+      <Typography variant="h3">Select APIs to listen changes</Typography>
       {/* MultiSelect component for user to select preferences */}
-      <Box className="mx-auto" style={{ width: "40rem" }}>
+      <Box className="mt-3">
         <MultiSelect
           multi
           hideSelectAll={true}

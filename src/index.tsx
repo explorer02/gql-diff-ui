@@ -6,6 +6,8 @@ import SpacewebProvider from "@sprinklrjs/spaceweb/spacewebProvider";
 import { Provider } from "react-redux";
 import { store } from "./store";
 
+import { HashRouter } from "react-router-dom";
+
 import light from "@sprinklrjs/spaceweb-themes/hyperspace/light";
 
 import "@sprinklrjs/spaceweb-themes/hyperspace/themeVars.min.css";
@@ -30,7 +32,9 @@ root.render(
   <React.StrictMode>
     <SpacewebProvider theme={light}>
       <Provider store={store}>
-        <App />
+        <HashRouter>
+          <App />
+        </HashRouter>
       </Provider>
     </SpacewebProvider>
   </React.StrictMode>
