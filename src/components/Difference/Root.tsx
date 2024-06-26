@@ -19,28 +19,30 @@ export const DisplayDifference: React.FC = () => {
 
   useEffect(() => {
     console.log("In Root.js -> UseEffect");
-    axios
-      .post("https://teams-bot-app-service.onrender.com/api/environments", {
-        userId,
-      })
-      .then((response: AxiosResponse) => {
-        console.log("response", response.data);
-        if (response?.data?.success === true) {
-          setDisplay(true);
-          response?.data?.environments &&
+    if (environments.length === 0) {
+      axios
+        .post("https://teams-bot-app-service.onrender.com/api/environments", {
+          userId,
+        })
+        .then((response: AxiosResponse) => {
+          console.log("response", response.data);
+          if (response?.data?.success === true) {
+            setDisplay(true);
+            // response?.data?.environments &&
             setEnvironments([...response.data.environments]);
-        } else if (response.data.message === "login first") {
-          // If the user needs to log in, navigate to the login error page
-          navigate("/error/login");
-        } else if (response.data.message === "set user preference first") {
-          // If the user needs to set preferences, navigate to the preferences page
-          navigate("/preferences");
-        } else {
-          // For any other errors, navigate to the 404 error page
-          navigate("/error/404");
-        }
-      });
-  }, []);
+          } else if (response.data.message === "login first") {
+            // If the user needs to log in, navigate to the login error page
+            navigate("/error/login");
+          } else if (response.data.message === "set user preference first") {
+            // If the user needs to set preferences, navigate to the preferences page
+            navigate("/preferences");
+          } else {
+            // For any other errors, navigate to the 404 error page
+            navigate("/error/404");
+          }
+        });
+    }
+  }, [userId]);
 
   console.log(environments);
 

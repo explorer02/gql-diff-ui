@@ -19,6 +19,7 @@ import format from "date-format";
 export const DisplayEnvironment: React.FC<{ environment: string }> = ({
   environment,
 }) => {
+  console.log("In Environment.tsx");
   const navigate: NavigateFunction = useNavigate();
   const userId: string = useAppSelector(
     (state: RootState) => state.user.value.userId
@@ -26,25 +27,28 @@ export const DisplayEnvironment: React.FC<{ environment: string }> = ({
 
   const [changes, setChanges] = useState<Changes>({}); // State to store the changes;
   useEffect(() => {
-    axios
-      .post("https://teams-bot-app-service.onrender.com/api/changes", {
-        userId,
-        environment,
-      })
-      .then((response: AxiosResponse) => {
-        if (response.data.success === true) {
-          // If the response is successful, update the state
-          console.log(response.data.changes);
-          setChanges({
-            ...response.data.changes,
-            timeStamp: response.data.timeStamp,
-          });
-        } else {
-          // For any other errors, navigate to the 404 error page
-          navigate("/error/404");
-        }
-      });
-  });
+    console.log("In Environment.tsx -> useEffect");
+    if (!changes?.changedValues) {
+      axios
+        .post("https://teams-bot-app-service.onrender.com/api/changes", {
+          userId,
+          environment,
+        })
+        .then((response: AxiosResponse) => {
+          if (response.data.success === true) {
+            // If the response is successful, update the state
+            console.log("respnse of /api/changes/ -> ", response.data.changes);
+            setChanges({
+              ...response.data.changes,
+              timeStamp: response.data.timeStamp,
+            });
+          } else {
+            // For any other errors, navigate to the 404 error page
+            navigate("/error/404");
+          }
+        });
+    }
+  }, []);
 
   return (
     <div className="Home">

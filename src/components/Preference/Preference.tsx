@@ -8,6 +8,7 @@ import { Root } from "react-dom/client";
 
 // Preferences component to manage and display user preferences
 export const Preferences: React.FC = () => {
+  console.log("In Preferences");
   // // State to store preference choices fetched from the server
   const [preferenceChoices, setPreferenceChoices] = useState<Choice[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -17,6 +18,7 @@ export const Preferences: React.FC = () => {
   );
 
   useEffect(() => {
+    console.log("In Preferences -> UseEffect");
     if (preferenceChoices.length === 0) {
       axios
         .post(
@@ -26,7 +28,10 @@ export const Preferences: React.FC = () => {
         .then((response: AxiosResponse) => {
           // If the response is successful, update the state with fetched choices
           if (response.data?.success) {
-            console.log(JSON.stringify(response.data.choices, null, 2));
+            console.log(
+              "response: ",
+              JSON.stringify(response.data.choices, null, 2)
+            );
             setPreferenceChoices(response.data.choices);
           } else {
             // Log the response in case of an unsuccessful request
@@ -35,7 +40,7 @@ export const Preferences: React.FC = () => {
           setLoading(false);
         });
     }
-  }, [preferenceChoices]);
+  }, []);
 
   return (
     <Box className="spr-ui-05 min-h-screen">
