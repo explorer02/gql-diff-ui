@@ -47,7 +47,7 @@ export const DisplayDifference: React.FC = () => {
   console.log(environments);
 
   return (
-    <Box>
+    <div>
       {display && <Navigation />}
       <Box>
         {environments.map((environment, id) => (
@@ -65,6 +65,6 @@ export const DisplayDifference: React.FC = () => {
           </div>
         ))}
       </Box>
-    </Box>
+    </div>
   );
 };
