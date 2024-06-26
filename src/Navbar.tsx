@@ -12,7 +12,7 @@ export const Navigation: React.FC = () => {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        margin: "20px 50px",
+        padding: "20px 50px",
       }}
     >
       <Typography variant="h2">Detect GQL Change</Typography>
