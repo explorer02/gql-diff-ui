@@ -108,7 +108,7 @@ const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
           }}
         >
           <Box style={{ maxHeight: "300px", overflowY: "scroll" }}>
-            <Diff viewType="split" diffType="" hunks={diff.hunks || []}>
+            <Diff viewType="split" diffType="add" hunks={diff.hunks || []}>
               {(hunks) =>
                 hunks.map((hunk) => <Hunk key={hunk.content} hunk={hunk} />)
               }
