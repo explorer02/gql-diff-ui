@@ -8,5 +8,5 @@ export function formatDate(date: Date) {
     hour12: true,
   };
 
-  return date.toLocaleString("en-US", options);
+  return `(${date.toLocaleString("en-US", options).replace("at ", "")})`;
 }
