@@ -49,12 +49,11 @@ export const Preferences: React.FC = () => {
           console.log("In Preference.tsx -> Axios-Response");
           // If the response is successful, update the state with fetched choices
           if (response.data?.success) {
-            console.log(
-              "response: ",
-              JSON.stringify(response.data.choices, null, 2)
-            );
+            console.log("response: ", JSON.stringify(response.data, null, 2));
 
             const { preferences } = response.data;
+
+            console.log("preferences: ", preferences);
 
             setPreferenceChoices(response.data.choices);
             setOldPreferences(getPreferenceValue(preferences));
