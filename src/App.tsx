@@ -22,6 +22,8 @@ import React from "react";
 function App(): JSX.Element {
   console.log("In App.tsx");
 
+  console.log("API Domain ->", process.env.REACT_APP_API_DOMAIN);
+
   const navigate = useNavigate(); // navigate hook of router for navigating through router
   const dispatch: AppDispatch = useAppDispatch(); // Get the dispatch function from Redux
 

@@ -98,6 +98,10 @@ export const DisplayEnvironment: React.FC<{ environment: string }> = ({
   );
 };
 
+const getLabel: (environment: string) => string = (environment: string) => {
+  return environment === "lite.qa6" ? "Lite QA6" : "Lite";
+};
+
 const EnvironmentTitle: React.FC<{
   title: string;
   timeStamp: string | undefined;
@@ -106,7 +110,7 @@ const EnvironmentTitle: React.FC<{
     <Typography>
       <div>
         <span style={{ fontWeight: "600", fontSize: "16px" }}>
-          Environment: {title}
+          Environment : {getLabel(title)}
         </span>
         <span style={{ fontSize: "14px", color: "#646470" }}>
           {" "}
