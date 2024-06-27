@@ -6,26 +6,6 @@ import {
   Slice,
 } from "@reduxjs/toolkit";
 
-interface RouteState {
-  value: {
-    url: string;
-  };
-}
-
-const initialRouteState: RouteState = {
-  value: { url: "/" },
-};
-
-const routeSlice: Slice<RouteState> = createSlice({
-  name: "route",
-  initialState: initialRouteState,
-  reducers: {
-    navigate: (state, action: PayloadAction<{ url: string }>) => {
-      state.value = { ...state.value, ...action.payload };
-    },
-  },
-});
-
 interface UserState {
   value: {
     userId: string;
@@ -49,12 +29,10 @@ const userSlice: Slice<UserState> = createSlice({
   },
 });
 
-export const { navigate } = routeSlice.actions;
 export const { login } = userSlice.actions;
 
 export const store = configureStore({
   reducer: {
-    route: routeSlice.reducer,
     user: userSlice.reducer,
   },
 });

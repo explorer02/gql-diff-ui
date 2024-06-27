@@ -10,10 +10,8 @@
   align-items: center;
   background: #007bff;
   color: white;
-  padding: 15px;
   cursor: pointer;
   font-weight: bold;
-  border-radius: 8px 8px 0 0;
   transition: background 0.3s;
 }
 
@@ -24,7 +22,8 @@
 .collapsible-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out,
+    margin-bottom 0.4s ease-in-out;
 }
 
 .collapsible-content.open {

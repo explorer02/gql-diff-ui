@@ -21,7 +21,7 @@ export const DisplayDifference: React.FC = () => {
     console.log("In Root.js -> UseEffect");
     if (environments.length === 0) {
       axios
-        .post("https://teams-bot-app-service.onrender.com/api/environments", {
+        .post(`${process.env.REACT_APP_API_DOMAIN}/api/environments`, {
           userId,
         })
         .then((response: AxiosResponse) => {
@@ -53,15 +53,8 @@ export const DisplayDifference: React.FC = () => {
         {environments.map((environment, id) => (
           <div
             key={id}
-            style={{
-              border: "1px solid black",
-              borderRadius: "12px",
-              margin: "12px",
-            }}
           >
-            <Box className="px-4 py-3">
               <DisplayEnvironment environment={environment} />
-            </Box>
           </div>
         ))}
       </Box>

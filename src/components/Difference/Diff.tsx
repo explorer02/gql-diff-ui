@@ -9,7 +9,8 @@ import { IconButton } from "@sprinklrjs/spaceweb/button";
 
 import { CopyButton } from "../Utils/CopyButton";
 
-const { diffLines, formatLines } = require("unidiff");
+//@ts-expect-error --declarationModuleMissing
+import { diffLines, formatLines } from "unidiff";
 
 function extractSchemaValue(schema: string): string {
   if (schema === null || schema.indexOf(`"""true"""`) === -1) {
@@ -46,7 +47,6 @@ export const DisplayDiff: React.FC<DiffViewProps> = ({ oldText, newText }) => {
 const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
   // const diffText: string = "";
   const diffText = formatLines(diffLines(oldText, newText), { context: 3 });
-  console.log("diffText: ", diffText);
   const [diff]: FileData[] = parseDiff(diffText, { nearbySequences: "zip" });
 
   const handleCopyButton: (text: string) => Promise<void> = async (
@@ -65,14 +65,17 @@ const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
       <main>
         <Box className="flex" id="old-heading">
           <Box
-            className="flex justify-between items-center w-1/2 px-3 py-2"
-            style={{ border: "1px solid black" }}
+            className="flex justify-between items-center w-1/2"
+            style={{
+              border: "1px solid  #E6E6E9",
+              borderRadius: "8px 0px 0px 0px",
+            }}
           >
-            <Box id="old-title">
-              <Typography variant="body-14"> Old Code </Typography>
-            </Box>
+            <div style={{ padding: "16px" }}>
+              <Typography variant="body-14"> Original API </Typography>
+            </div>
             <IconButton
-              size={"xxs"}
+              size={"sm"}
               onClick={() => handleCopyButton(oldText)}
               tooltipContent=""
             >
@@ -80,18 +83,19 @@ const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
             </IconButton>
           </Box>
           <Box
-            className="flex justify-between items-center w-1/2 px-3 py-2"
+            className="flex justify-between items-center w-1/2"
             style={{
-              borderTop: "1px solid black",
-              borderBottom: "1px solid black",
-              borderRight: "1px solid black",
+              borderTop: "1px solid  #E6E6E9",
+              borderBottom: "1px solid  #E6E6E9",
+              borderRight: "1px solid  #E6E6E9",
+              borderRadius: "0px 8px 0px 0px",
             }}
           >
-            <Box id="new-title">
-              <Typography variant="body-14"> New Code </Typography>
-            </Box>
+            <div style={{ padding: "16px" }}>
+              <Typography variant="body-14"> Changed API </Typography>
+            </div>
             <IconButton
-              size={"xxs"}
+              size={"sm"}
               onClick={() => () => handleCopyButton(newText)}
               tooltipContent=""
             >
@@ -102,17 +106,21 @@ const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
         <Box
           className="pt-3"
           style={{
-            borderLeft: "1px solid black",
-            borderBottom: "1px solid black",
-            borderRight: "1px solid black",
+            borderLeft: "1px solid  #E6E6E9",
+            borderBottom: "1px solid  #E6E6E9",
+            borderRight: "1px solid  #E6E6E9",
+            borderRadius: "0px 0px 8px 8px",
           }}
         >
           <Box style={{ maxHeight: "300px", overflowY: "scroll" }}>
-            <Diff viewType="split" diffType="add" hunks={diff.hunks || []}>
-              {(hunks) =>
-                hunks.map((hunk) => <Hunk key={hunk.content} hunk={hunk} />)
-              }
-            </Diff>
+            <Typography variant="l2">
+              {/*@ts-expect-error --toShowAllDiffs*/}
+              <Diff viewType="split" diffType="" hunks={diff.hunks || []}>
+                {(hunks) =>
+                  hunks.map((hunk) => <Hunk key={hunk.content} hunk={hunk} />)
+                }
+              </Diff>
+            </Typography>
           </Box>
         </Box>
       </main>

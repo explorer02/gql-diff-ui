@@ -55,14 +55,19 @@ interface Choice {
 
 interface ShowSpaceSelectProps {
   choices: Choice[];
+  oldPreferences: Value;
 }
 
 interface CollapsibleProps {
-  title: string;
+  title: React.ReacNode;
   children: React.ReactNode;
 }
 
 interface DisplayDifferenceProps {
   name: string;
   changes: Changes;
+}
+
+interface Preferences {
+  [key: string]: string[];
 }

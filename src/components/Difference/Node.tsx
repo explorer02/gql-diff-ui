@@ -6,6 +6,8 @@ import { Box } from "@sprinklrjs/spaceweb/box";
 
 import { Collapsible } from "../Utils/Collapsible";
 
+import React from "react";
+
 // key -> node affected and values are list
 export const DisplayNode: React.FC<DisplayNodeProps> = ({
   name,
@@ -13,35 +15,42 @@ export const DisplayNode: React.FC<DisplayNodeProps> = ({
   nodeChanges,
 }) => {
   return (
-    <div className="node-head" style={{ padding: "12px" }}>
-      <Collapsible title={"Query: " + name}>
-        <Box>
+    <div
+      className="node-head"
+      style={{
+        padding: "12px",
+        border: "1px solid #DBDBDB",
+        borderRadius: "12px",
+      }}
+    >
+      <Collapsible title={<NodeTitle title={name} />}>
+        <div style={{ padding: "12px" }}>
           {pathsTo &&
-            Object.keys(pathsTo).map((endNode) => {
+            Object.keys(pathsTo).map((endNode, index) => {
               return (
                 <div
+                  key={index}
                   style={{
-                    border: "1px solid black",
+                    border: "1px solid  #DBDBDB",
                     borderRadius: "12px",
-                    marginTop: "14px",
-                    padding: "14px",
+                    padding: "12px",
                   }}
                 >
                   <Box>
-                    <Typography variant="body-14">
+                    <div style={{ fontSize: "14px", fontWeight: "default" }}>
                       Affected Fragment : {endNode}
-                    </Typography>
+                    </div>
                     <div>
-                      <Typography variant="body-14">
+                      <div style={{ fontSize: "14px", fontWeight: "default" }}>
                         Possible Paths :
-                      </Typography>
+                      </div>
                       <div>
                         <DisplayPaths paths={pathsTo[endNode]} />
                       </div>
                     </div>
                     <div
                       className="diff-display"
-                      style={{ paddingTop: "20px" }}
+                      style={{ paddingTop: "12px" }}
                     >
                       <DisplayDiff
                         oldText={nodeChanges[endNode].oldValue}
@@ -52,8 +61,29 @@ export const DisplayNode: React.FC<DisplayNodeProps> = ({
                 </div>
               );
             })}
-        </Box>
+        </div>
       </Collapsible>
     </div>
+  );
+};
+
+const NodeTitle: React.FC<{
+  title: string;
+}> = ({ title }) => {
+  return (
+    <Typography>
+      <div style={{ fontWeight: "500", fontSize: "14px" }}>
+        API :{" "}
+        <span
+          style={{
+            backgroundColor: "#DBDBDB",
+            borderRadius: "4px",
+            padding: "4px",
+          }}
+        >
+          {title}
+        </span>
+      </div>
+    </Typography>
   );
 };

@@ -6,6 +6,11 @@ html {
   background-color: white;
 }
 
+.diff-view .diff-line {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 .borderly {
   border: "1px solid black";
 }
