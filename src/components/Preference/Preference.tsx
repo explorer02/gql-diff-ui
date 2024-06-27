@@ -13,8 +13,8 @@ import { LoadingSpinner } from "../Utils/Spinner";
 function getPreferenceValue(preferences: Preferences): Value {
   let preferencesOptions: Value = [];
 
-  Object.keys(preferences).map((environment: string) => {
-    preferences[environment].map((choice: string) => {
+  Object.keys(preferences).forEach((environment: string) => {
+    preferences[environment].forEach((choice: string) => {
       const currentChoiceOption: Option = {
         label: choice,
         id: choice + "#" + environment,
