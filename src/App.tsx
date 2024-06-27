@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 // Essentials
 import "./App.css";
 import * as msTeams from "@microsoft/teams-js";
@@ -16,8 +17,6 @@ import { useAppDispatch } from "./Hooks/store";
 // React Utilities
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-
-import React from "react";
 
 function App(): JSX.Element {
   console.log("In App.tsx");
