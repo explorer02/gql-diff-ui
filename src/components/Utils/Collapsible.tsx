@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Collapsible.css";
 import { ChevronDownIcon } from "./Icons";
-import { Typography } from "@sprinklrjs/spaceweb/typography";
 import { Box } from "@sprinklrjs/spaceweb/box";
 
 export const Collapsible: React.FC<CollapsibleProps> = ({
@@ -22,14 +21,18 @@ export const Collapsible: React.FC<CollapsibleProps> = ({
   };
 
   return (
-    <div className="collapsible">
+    <div
+      className="collapsible"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <Box
         className="flex justify-between items-center cursor-pointer"
         onClick={toggle}
       >
-        <Typography weight={"regular"} variant="h3">
-          {title}
-        </Typography>
+        {title}
         <ChevronDownIcon isOpen={isOpen} />
       </Box>
       <div

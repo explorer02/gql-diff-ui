@@ -3,6 +3,8 @@ import { Button } from "@sprinklrjs/spaceweb/button";
 
 import { useNavigate } from "react-router-dom";
 
+import React from "react";
+
 export const Navigation: React.FC = () => {
   const navigate = useNavigate();
   return (
@@ -12,10 +14,9 @@ export const Navigation: React.FC = () => {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: "20px 50px",
       }}
     >
-      <Typography variant="h2">Detect GQL Change</Typography>
+      <Typography variant="h2">API Differences</Typography>
       <div className="navs">
         <div
           style={{ cursor: "pointer" }}
@@ -24,7 +25,7 @@ export const Navigation: React.FC = () => {
             navigate("/preferences");
           }}
         >
-          <Button variant="tertiary">Set Preferences</Button>
+          <Button variant="secondary">Set Preferences</Button>
         </div>
       </div>
     </div>

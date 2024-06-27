@@ -28,7 +28,7 @@ function getOptions(choices: Choice[]): Optgroups {
         QueriesGroup[choice.environment] = [];
       QueriesGroup[choice.environment].push({
         label: choice.name,
-        id: choice.name,
+        id: choice.name + "#" + choice.environment,
         environment: choice.environment,
       });
     } else {
@@ -57,9 +57,12 @@ function getOptions(choices: Choice[]): Optgroups {
 // Component to display and handle user selection of preferences
 export const ShowSpaceSelect: React.FC<ShowSpaceSelectProps> = ({
   choices,
+  oldPreferences,
 }) => {
+  console.log("In Select.tsx");
+  console.log("oldPreferences: ", oldPreferences);
   // State to manage selected values and error state
-  const [value, setValue] = useState<Value>([]);
+  const [value, setValue] = useState<Value>(oldPreferences);
   const [emptyError, setEmptyError] = useState<boolean>(false);
 
   const userId: string = useAppSelector(
@@ -74,14 +77,11 @@ export const ShowSpaceSelect: React.FC<ShowSpaceSelectProps> = ({
     if (value.length) {
       // Make a POST request to save preferences
       axios
-        .post(
-          "https://teams-bot-app-service.onrender.com/api/preferences/save",
-          {
-            environment: "lite.qa6",
-            choices: value,
-            userId: userId,
-          }
-        )
+        .post(`${process.env.REACT_APP_API_DOMAIN}/api/preferences/save`, {
+          environment: "lite.qa6",
+          choices: value,
+          userId: userId,
+        })
         .then((response: AxiosResponse) => {
           // Handle successful response
           if (response.data?.success) {
@@ -102,12 +102,13 @@ export const ShowSpaceSelect: React.FC<ShowSpaceSelectProps> = ({
     <div
       className="spr-border-03"
       style={{
-        border: "1px solid black",
+        border: "1px solid #DBDBDB",
         borderRadius: "12px",
-        width: "40rem",
-        padding: "4rem",
+        width: "100%",
+        maxWidth: "60rem",
+        padding: "20px",
         margin: "auto",
-        minHeight: "60rem",
+        height: "auto",
         backgroundColor: "white",
       }}
     >
@@ -141,7 +142,7 @@ export const ShowSpaceSelect: React.FC<ShowSpaceSelectProps> = ({
       {/* Save button to submit the selected preferences */}
       <div
         className="save-btn"
-        style={{ display: "flex", justifyContent: "center", marginTop: "40px" }}
+        style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}
       >
         <Button variant="primary" onClick={handleSaveButton}>
           Submit

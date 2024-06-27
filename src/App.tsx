@@ -16,6 +16,8 @@ import { useAppDispatch } from "./Hooks/store";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
+import React from "react";
+
 function App(): JSX.Element {
   console.log("In App.tsx");
 
@@ -42,7 +44,10 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{ paddingLeft: "24px", paddingRight: "24px", paddingTop: "12px" }}
+    >
       <Routes>
         <Route path="/" element={<div></div>} />
         <Route path="/changes" element={<DisplayDifference />} />

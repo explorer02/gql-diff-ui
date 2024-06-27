@@ -4,6 +4,8 @@ import { Box } from "@sprinklrjs/spaceweb/box";
 import { IconButton } from "@sprinklrjs/spaceweb/button";
 import { CopyButton } from "../Utils/CopyButton";
 
+import React from "react";
+
 export const DisplayPaths: React.FC<DisplayPathsProps> = ({ paths }) => {
   const [displayLength, setDisplayLength] = useState<number>(
     Math.min(6, paths.length)
@@ -18,7 +20,11 @@ export const DisplayPaths: React.FC<DisplayPathsProps> = ({ paths }) => {
     <div className="paths-head">
       {paths.map((path, index) => {
         if (index < displayLength) {
-          return <DisplayPath path={path} />;
+          return (
+            <div key={index}>
+              <DisplayPath path={path} />
+            </div>
+          );
         }
         return <></>;
       })}
@@ -28,7 +34,7 @@ export const DisplayPaths: React.FC<DisplayPathsProps> = ({ paths }) => {
             <button
               onClick={handleShowMoreButton}
               style={{
-                fontSize: "15px",
+                fontSize: "12px",
                 fontWeight: "200",
                 color: "blue",
                 textDecoration: "underline",
@@ -44,7 +50,7 @@ export const DisplayPaths: React.FC<DisplayPathsProps> = ({ paths }) => {
             <button
               onClick={handleShowLessButton}
               style={{
-                fontSize: "15px",
+                fontSize: "12px",
                 fontWeight: "200",
                 color: "blue",
                 textDecoration: "underline",
@@ -64,7 +70,7 @@ const DisplayPath: React.FC<DisplayPathProps> = ({ path }) => {
   const handleCopyButton: () => Promise<void> = async () => {
     try {
       await navigator.clipboard.writeText(path.split(" -> ").join(" → "));
-    } catch (err: any) {
+    } catch (err) {
       console.error("Unable to copy to clipboard.", err);
       alert("Copy to clipboard failed.");
     }
@@ -73,7 +79,7 @@ const DisplayPath: React.FC<DisplayPathProps> = ({ path }) => {
   return (
     <div
       style={{
-        border: "1px solid black",
+        border: "1px solid #DBDBDB",
         borderRadius: "12px",
         marginTop: "14px",
         marginBottom: "14px",
@@ -83,16 +89,16 @@ const DisplayPath: React.FC<DisplayPathProps> = ({ path }) => {
       <Box className="flex justify-between flex-row-reverse items-center gap-4">
         <div style={{ display: "flex", justifyContent: "right" }}>
           <IconButton
-            size={"xs"}
+            size={"sm"}
             tooltipContent={""}
             onClick={handleCopyButton}
           >
             <CopyButton />
           </IconButton>
         </div>
-        <Typography className="body-14">
+        <div style={{ fontSize: "12px", fontWeight: "500" }}>
           {path.split(" -> ").join(" → ")}
-        </Typography>
+        </div>
       </Box>
     </div>
   );
