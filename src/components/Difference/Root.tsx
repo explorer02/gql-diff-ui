@@ -47,14 +47,14 @@ export const DisplayDifference: React.FC = () => {
   console.log(environments);
 
   return (
-    <div>
+    <div
+      style={{ paddingLeft: "24px", paddingRight: "24px", paddingTop: "12px" }}
+    >
       {display && <Navigation />}
       <Box>
         {environments.map((environment, id) => (
-          <div
-            key={id}
-          >
-              <DisplayEnvironment environment={environment} />
+          <div key={id}>
+            <DisplayEnvironment environment={environment} />
           </div>
         ))}
       </Box>
