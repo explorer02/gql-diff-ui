@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/gql-diff-ui/static/css/main.6d9adae2.css",
-    "main.js": "/gql-diff-ui/static/js/main.a989f2b8.js",
+    "main.css": "/gql-diff-ui/static/css/main.9292f3c5.css",
+    "main.js": "/gql-diff-ui/static/js/main.6f439c5e.js",
     "index.html": "/gql-diff-ui/index.html",
-    "main.6d9adae2.css.map": "/gql-diff-ui/static/css/main.6d9adae2.css.map",
-    "main.a989f2b8.js.map": "/gql-diff-ui/static/js/main.a989f2b8.js.map"
+    "main.9292f3c5.css.map": "/gql-diff-ui/static/css/main.9292f3c5.css.map",
+    "main.6f439c5e.js.map": "/gql-diff-ui/static/js/main.6f439c5e.js.map"
   },
   "entrypoints": [
-    "static/css/main.6d9adae2.css",
-    "static/js/main.a989f2b8.js"
+    "static/css/main.9292f3c5.css",
+    "static/js/main.6f439c5e.js"
   ]
 }
