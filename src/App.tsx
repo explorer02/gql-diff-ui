@@ -7,6 +7,7 @@ import { DisplayDifference } from "./components/Difference/Root";
 import { Preferences } from "./components/Preference/Preference";
 import { LoginError } from "./components/Error/Login";
 import { Error404 } from "./components/Error/Error";
+import { LoadingSpinner } from "./components/Utils/Spinner";
 
 // Redux Tools
 import { AppDispatch, login } from "./store";
@@ -44,12 +45,9 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <div
-      className="App"
-      style={{ paddingLeft: "24px", paddingRight: "24px", paddingTop: "12px" }}
-    >
+    <div className="App">
       <Routes>
-        <Route path="/" element={<div></div>} />
+        <Route path="/" element={<LoadingSpinner color="black" />} />
         <Route path="/changes" element={<DisplayDifference />} />
         <Route path="/preferences" element={<Preferences />} />
         <Route path="/error/login" element={<LoginError />} />

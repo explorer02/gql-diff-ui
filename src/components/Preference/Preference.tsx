@@ -1,11 +1,12 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { ShowSpaceSelect } from "./Select";
 import { Box } from "@sprinklrjs/spaceweb/box";
 import { useAppSelector } from "../../Hooks/store";
-import { AppDispatch, RootState } from "../../store";
-import { Root } from "react-dom/client";
-import { Option, Options, Value } from "@sprinklrjs/spaceweb/select";
+import { RootState } from "../../store";
+import { Option, Value } from "@sprinklrjs/spaceweb/select";
+import { LoadingSpinner } from "../Utils/Spinner";
 
 // Preferences component to manage and display user preferences
 
@@ -76,6 +77,7 @@ export const Preferences: React.FC = () => {
             oldPreferences={oldPreferences}
           />
         )}
+        {loading === true && <LoadingSpinner color="black" />}
       </div>
     </Box>
   );

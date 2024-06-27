@@ -106,7 +106,7 @@ export const ShowSpaceSelect: React.FC<ShowSpaceSelectProps> = ({
         borderRadius: "12px",
         width: "100%",
         maxWidth: "60rem",
-        padding: "20px",
+        padding: "32px",
         margin: "auto",
         height: "auto",
         backgroundColor: "white",
@@ -115,7 +115,7 @@ export const ShowSpaceSelect: React.FC<ShowSpaceSelectProps> = ({
       {/* Header with instructions */}
       <Typography variant="h3">Select APIs to listen changes</Typography>
       {/* MultiSelect component for user to select preferences */}
-      <Box className="mt-3">
+      <Box className="mt-5">
         <MultiSelect
           multi
           hideSelectAll={true}

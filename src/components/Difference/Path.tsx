@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Typography } from "@sprinklrjs/spaceweb/typography";
 import { Box } from "@sprinklrjs/spaceweb/box";
 import { IconButton } from "@sprinklrjs/spaceweb/button";
 import { CopyButton } from "../Utils/CopyButton";
