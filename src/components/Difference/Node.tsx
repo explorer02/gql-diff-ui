@@ -34,6 +34,7 @@ export const DisplayNode: React.FC<DisplayNodeProps> = ({
                     border: "1px solid  #DBDBDB",
                     borderRadius: "12px",
                     padding: "12px",
+                    margin: "12px 0px",
                   }}
                 >
                   <Box>
