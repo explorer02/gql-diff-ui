@@ -80,16 +80,17 @@ export const ShowSpaceSelect: React.FC<ShowSpaceSelectProps> = ({
         .post(`${process.env.REACT_APP_API_DOMAIN}/api/preferences/save`, {
           environment: "lite.qa6",
           choices: value,
-          userId: userId,
+          userId,
         })
         .then((response: AxiosResponse) => {
           // Handle successful response
           if (response.data?.success) {
-            navigate("/changes"); // Navigate to home page on success
+            navigate("/changes"); // Navigate to changes page on success
           } else {
             // Log the response in case of an error
             console.log(JSON.stringify(response, null, 2));
             console.log("Error from", ": function handleSaveButton");
+            navigate("/error/404");
           }
         });
     } else {
@@ -118,7 +119,7 @@ export const ShowSpaceSelect: React.FC<ShowSpaceSelectProps> = ({
       <Box className="mt-5">
         <MultiSelect
           multi
-          hideSelectAll={true}
+          hideSelectAll={false}
           maxDropdownHeight={"55vh"}
           filterOutSelected={false}
           options={getOptions(choices)} // Set options from transformed choices

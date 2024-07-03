@@ -1,5 +1,6 @@
 // Essentials
 import React, { useEffect, useState } from "react";
+import { LoadingSpinner } from "../Utils/Spinner";
 import axios, { AxiosResponse } from "axios";
 import { Collapsible } from "../Utils/Collapsible";
 // Redux Tools
@@ -21,6 +22,7 @@ export const DisplayEnvironment: React.FC<{ environment: string }> = ({
   ); // Get the userId from Redux store
 
   const [changes, setChanges] = useState<Changes>({}); // State to store the changes;
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     console.log("In Environment.tsx -> useEffect");
@@ -39,6 +41,7 @@ export const DisplayEnvironment: React.FC<{ environment: string }> = ({
               ...response.data.changes,
               timeStamp: response.data.timeStamp,
             });
+            setIsLoading(false);
           } else {
             // For any other errors, navigate to the 404 error page
             navigate("/error/404");
@@ -49,51 +52,54 @@ export const DisplayEnvironment: React.FC<{ environment: string }> = ({
 
   return (
     <>
-      <div
-        className="Environment"
-        style={{
-          padding: "12px 24px 12px 24px",
-          border: "1px solid #DBDBDB",
-          borderRadius: "12px",
-          marginTop: "12px",
-        }}
-      >
-        <Collapsible
-          title={
-            <EnvironmentTitle
-              title={environment}
-              timeStamp={changes.timeStamp}
-            />
-          }
+      {isLoading === false && (
+        <div
+          className="Environment"
+          style={{
+            padding: "12px 24px 12px 24px",
+            border: "1px solid #DBDBDB",
+            borderRadius: "12px",
+            marginTop: "12px",
+          }}
         >
-          {changes.paths && Object.keys(changes.paths).length > 0 && (
-            <div
-              className="main-diff"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "14px",
-                padding: "12px 0px",
-              }}
-            >
-              {changes?.paths &&
-                Object.keys(changes.paths).map((node) => {
-                  return (
-                    changes.paths &&
-                    changes.paths[node] &&
-                    changes.changedValues && (
-                      <DisplayNode
-                        name={node}
-                        pathsTo={changes?.paths[node]}
-                        nodeChanges={changes?.changedValues}
-                      />
-                    )
-                  );
-                })}
-            </div>
-          )}
-        </Collapsible>
-      </div>
+          <Collapsible
+            title={
+              <EnvironmentTitle
+                title={environment}
+                timeStamp={changes.timeStamp}
+              />
+            }
+          >
+            {changes.paths && Object.keys(changes.paths).length > 0 && (
+              <div
+                className="main-diff"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "14px",
+                  padding: "12px 0px",
+                }}
+              >
+                {changes?.paths &&
+                  Object.keys(changes.paths).map((node) => {
+                    return (
+                      changes.paths &&
+                      changes.paths[node] &&
+                      changes.changedValues && (
+                        <DisplayNode
+                          name={node}
+                          pathsTo={changes?.paths[node]}
+                          nodeChanges={changes?.changedValues}
+                        />
+                      )
+                    );
+                  })}
+              </div>
+            )}
+          </Collapsible>
+        </div>
+      )}
+      {isLoading && <LoadingSpinner color="black" height="50%" />}
     </>
   );
 };
