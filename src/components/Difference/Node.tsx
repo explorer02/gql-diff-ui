@@ -42,8 +42,14 @@ export const DisplayNode: React.FC<DisplayNodeProps> = ({
                       Affected Fragment : {endNode}
                     </div>
                     <div>
-                      <div style={{ fontSize: "14px", fontWeight: "default" }}>
-                        Possible Paths :
+                      <div
+                        style={{
+                          fontSize: "14px",
+                          fontWeight: "default",
+                          marginTop: "8px",
+                        }}
+                      >
+                        Possible Paths
                       </div>
                       <div>
                         <DisplayPaths paths={pathsTo[endNode]} />
