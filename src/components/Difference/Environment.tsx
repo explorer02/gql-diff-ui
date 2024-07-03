@@ -99,7 +99,7 @@ export const DisplayEnvironment: React.FC<{ environment: string }> = ({
           </Collapsible>
         </div>
       )}
-      {isLoading && <LoadingSpinner color="black" height="50%" />}
+      {isLoading && <LoadingSpinner color="black" />}
     </>
   );
 };
