@@ -1,14 +1,17 @@
 import React from "react";
 import styles from "./spinner.module.css"; // Assuming you have a CSS file for styling
 
-export const LoadingSpinner: React.FC<{ color: string }> = ({ color }) => {
+export const LoadingSpinner: React.FC<{ color: string; height?: string }> = ({
+  color,
+  height = "100vh",
+}) => {
   return (
     <div
       className={styles["loading-spinner"]}
       style={{
         borderTopColor: color,
         width: "100%",
-        height: "100vh",
+        height: height,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
