@@ -3,9 +3,7 @@ import { Button } from "@sprinklrjs/spaceweb/button";
 
 import { useNavigate } from "react-router-dom";
 
-import React from "react";
-
-export const Navigation: React.FC = () => {
+export const Navigation = (): JSX.Element => {
   const navigate = useNavigate();
   return (
     <div

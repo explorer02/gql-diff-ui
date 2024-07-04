@@ -10,6 +10,7 @@ import { LoadingSpinner } from "../Utils/Spinner";
 
 // Preferences component to manage and display user preferences
 
+// extract into utils.ts
 function getPreferenceValue(preferences: Preferences): Value {
   let preferencesOptions: Value = [];
 
@@ -70,13 +71,14 @@ export const Preferences: React.FC = () => {
     <Box className="spr-ui-05 min-h-screen">
       <div className="preference-head spr-ui-05" style={{ paddingTop: "4rem" }}>
         {/* Render the ShowSpaceSelect component with the fetched preference choices */}
-        {loading === false && (
+        {loading ? (
+          <LoadingSpinner color="black" />
+        ) : (
           <ShowSpaceSelect
             choices={preferenceChoices}
             oldPreferences={oldPreferences}
           />
         )}
-        {loading === true && <LoadingSpinner color="black" />}
       </div>
     </Box>
   );

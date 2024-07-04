@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./spinner.module.css"; // Assuming you have a CSS file for styling
 
+// spaceweb component
 export const LoadingSpinner: React.FC<{ color: string; height?: string }> = ({
   color,
   height = "100vh",

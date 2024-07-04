@@ -1,0 +1,7 @@
+- 'React' must be in scope when using JSX
+- folder structure
+- remove && and use conditional
+- remove unnecessary logs
+- react query
+- folder name in camel case
+- rearrange imports -> libs, components, hooks, utils, constants, types

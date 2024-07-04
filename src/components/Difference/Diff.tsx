@@ -48,6 +48,7 @@ const DiffView: React.FC<DiffViewProps> = ({ oldText, newText }) => {
   console.log("old text :", oldText);
   console.log("new text :", newText);
   const diffText = formatLines(diffLines(oldText, newText), { context: 3 });
+
   const [diff]: FileData[] = parseDiff(diffText, { nearbySequences: "zip" });
 
   const handleCopyButton: (text: string) => Promise<void> = async (
