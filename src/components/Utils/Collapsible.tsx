@@ -3,6 +3,10 @@ import "./Collapsible.css";
 import { ChevronDownIcon } from "./Icons";
 import { Box } from "@sprinklrjs/spaceweb/box";
 
+// extract into separate folder
+// shared/components/collapsible
+// Collapsible.tsx
+// collapsible.css
 export const Collapsible: React.FC<CollapsibleProps> = ({
   title,
   children,

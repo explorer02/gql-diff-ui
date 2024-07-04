@@ -25,6 +25,7 @@ export const DisplayNode: React.FC<DisplayNodeProps> = ({
     >
       <Collapsible title={<NodeTitle title={name} />}>
         <div style={{ padding: "12px" }}>
+          {/* pathsTo?<>:null */}
           {pathsTo &&
             Object.keys(pathsTo).map((endNode, index) => {
               return (
